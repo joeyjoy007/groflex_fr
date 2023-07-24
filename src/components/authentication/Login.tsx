@@ -1,17 +1,19 @@
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Modal, Form, Input } from 'antd';
-import React from 'react';
+import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../context/context';
 
 const Login = () => {
     const navigate = useNavigate();
     const onFinish = (values: any) => {
         console.log('Received values of form: ', values);
-        navigate('/g');
+        login(values);
+        // navigate('/g');
 
       };
 
-      const [modal1Open, setModal1Open] = React.useState(false);
+      const {login} = useContext(AuthContext);
       const [modal2Open, setModal2Open] = React.useState(false);
   return (
     <div style={{border:'2px solid gray',padding:20,borderRadius:10,justifyContent:'center',alignItems:'center'}}>
@@ -22,10 +24,10 @@ const Login = () => {
       onFinish={onFinish}
     >
       <Form.Item
-        name="username"
-        rules={[{ required: true, message: 'Please input your Username!' }]}
+        name="email"
+        rules={[{ required: true, message: 'Please input your email!' }]}
       >
-        <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
+        <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="email" />
       </Form.Item>
       <Form.Item
         name="password"

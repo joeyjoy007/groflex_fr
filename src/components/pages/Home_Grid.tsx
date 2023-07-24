@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
 import { Avatar, Card,Skeleton,Switch,Pagination,Popover,Input} from 'antd';
-import React from 'react';
+import React, { useContext } from 'react';
 import { Layout, Space } from 'antd';
+import { AuthContext } from '../../context/context';
 
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -19,10 +20,19 @@ const { Meta } = Card;
 const {Search} = Input
 const Home_Grid = () => {
     const [loading, setLoading] = React.useState(true);
+    const [info, setInfo] = React.useState(null);
 
     const onChange = (checked: boolean) => {
       setLoading(!checked);
     };
+
+    const {logout} = useContext(AuthContext);
+
+    React.useEffect(() => {
+      const infom = localStorage.getItem('userInfo');
+      setInfo(JSON.parse(infom));
+    }, [])
+    
   
   return (
     <>
@@ -30,7 +40,16 @@ const Home_Grid = () => {
     <Layout>
       <Header style={headerStyle}>
 
-      <Popover placement="bottom" title={"Title"} content={"content"} trigger="click">
+      <Popover placement="bottom" title={info?.payload?.user?.username} content={()=>{
+        return (
+          <div>
+            {info?.payload?.user?.email}
+            <div onClick={()=>logout()} style={{marginTop:5}}>
+              Logout
+            </div>
+          </div>
+        )
+      }} trigger="click">
          <Avatar src="https://xsgames.co/randomusers/avatar.php?g=pixel&key=1" />
       </Popover>
       </Header>
