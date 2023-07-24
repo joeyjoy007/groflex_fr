@@ -1,16 +1,20 @@
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Modal, Form, Input } from 'antd';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
+    const navigate = useNavigate();
     const onFinish = (values: any) => {
         console.log('Received values of form: ', values);
+        navigate('/g');
+
       };
 
       const [modal1Open, setModal1Open] = React.useState(false);
       const [modal2Open, setModal2Open] = React.useState(false);
   return (
-    <div style={{border:'2px solid gray',padding:20,borderRadius:10}}>
+    <div style={{border:'2px solid gray',padding:20,borderRadius:10,justifyContent:'center',alignItems:'center'}}>
          <Form
       name="normal_login"
       className="login-form"
@@ -32,11 +36,11 @@ const Login = () => {
           type="password"
           placeholder="Password"
         />
-        <a onClick={(e)=>{e.preventDefault() ,setModal2Open(true)}} style={{float:'right'}} href="">
+       
+      </Form.Item>
+        <a onClick={(e)=>{e.preventDefault() ,setModal2Open(true)}} style={{float:'right',marginTop:'-23px'}} href="">
           Forgot password
         </a>
-      </Form.Item>
-    
        
     
 

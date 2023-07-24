@@ -22,6 +22,7 @@ const Register = () => {
         // },
       ];
   return (
+    
     <div style={{border:'2px solid gray', padding:20,borderRadius:10}}>
 
     <Form
