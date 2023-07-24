@@ -1,9 +1,17 @@
-import React from 'react'
+import {
+    Route,
+    Routes,
+  } from "react-router-dom";
+import Register from "../components/authentication/Register";
+import Login from "../components/authentication/Login";
 
-const app_navigation = () => {
+const App_navigation = () => {
   return (
-    <div>app_navigation</div>
+    <Routes>
+        <Route path="/" element={<Register/>}/>
+        <Route path="/l" element={<Login/>}/>
+    </Routes>
   )
 }
 
-export default app_navigation
+export default App_navigation

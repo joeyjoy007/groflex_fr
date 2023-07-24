@@ -1,10 +1,15 @@
 import { LockOutlined, UserOutlined ,UploadOutlined } from '@ant-design/icons';
 import { Button, Radio, Form, Input,DatePicker,Select,Checkbox,Upload,Row,Col,UploadFile } from 'antd';
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
 
+    const navigate = useNavigate();
+
     const onFinish = (values: any) => {
         console.log('Received values of form: ', values);
+        navigate('/l')
+
       };
 
 
@@ -17,9 +22,9 @@ const Register = () => {
         // },
       ];
   return (
-    <div>
+    <div style={{border:'2px solid gray', padding:20,borderRadius:10}}>
 
-<Form
+    <Form
       name="normal_login"
       className="login-form"
       initialValues={{ remember: true }}
@@ -29,19 +34,19 @@ const Register = () => {
 
     <div style={{display:'flex',flexWrap:'wrap',justifyContent:'space-between'}}>
         <Form.Item
-        name="firstname"
-        rules={[{ required: true, message: 'please input your firstname!' }]}
+        name="username"
+        rules={[{ required: true, message: 'please input your username!' }]}
       >
-        <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="firstname" />
+        <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="username" />
       </Form.Item>
 
       <Form.Item
-        name="lastname"
+        name="email"
         style={{marginLeft:10}}
-        rules={[{ required: true, message: 'please input your lastname!' }]}
+        rules={[{ required: true, message: 'write email in correct format' }]}
       >
-        <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="lastname" />
-        </Form.Item>
+        <Input type='email' prefix={<UserOutlined className="site-form-item-icon" />} placeholder="email" />
+      </Form.Item>
     </div>
 
 
@@ -94,10 +99,50 @@ const Register = () => {
    
      </div>
 
+
+
+    <div style={{display:'flex',justifyContent:'space-between',flexWrap:'wrap'}}>    
+      <Form.Item
+     name='profile'
+
+         >
+         <Upload
+             action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+             listType="picture"
+             defaultFileList={[...fileList]}
+             >
+               <Button icon={<UploadOutlined />}>Upload Profile</Button>
+         </Upload>
+    </Form.Item>
+    <Form.Item
+        name="password"
+        rules={[{ required: true, message: 'please input your password!' }]}
+      >
+        <Input
+          prefix={<LockOutlined className="site-form-item-icon" />}
+          type="password"
+          placeholder="Password"
+        />
+      </Form.Item>
+
+    </div>
+
   
 
- 
-     <Form.Item name="interest" 
+    <Form.Item label="Gender" 
+      name="gender"
+      rules={[{ required: true, message: 'please input your gender!' }]}
+      >
+          <Radio.Group style={{display:'flex',flexDirection:'column'}}>
+            <Radio value="Male"> Male</Radio>
+            <Radio value="Female"> Female </Radio>
+          </Radio.Group>
+    </Form.Item>
+
+
+  
+    
+    <Form.Item name="interest" 
      label="Interest"
      rules={[{ required: true, message: 'choose atleast 1 interest' }]}
      >
@@ -122,47 +167,13 @@ const Register = () => {
       </Checkbox.Group>
     </Form.Item>
 
-    <div style={{display:'flex',justifyContent:'space-between',flexWrap:'wrap'}}>
-    <Form.Item label="Gender" 
-      name="gender"
-      rules={[{ required: true, message: 'please input your gender!' }]}
-      >
-          <Radio.Group style={{display:'flex',flexDirection:'column'}}>
-            <Radio value="Male"> Male</Radio>
-            <Radio value="Female"> Female </Radio>
-          </Radio.Group>
-    </Form.Item>
-
-
-    <Form.Item
-    name='profile'
-
-    >
-         <Upload
-             action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-             listType="picture"
-             defaultFileList={[...fileList]}
-             >
-               <Button icon={<UploadOutlined />}>Upload Profile</Button>
-         </Upload>
-    </Form.Item>
-
-     </div>
-
 
 
    
 
-      <Form.Item
-        name="password"
-        rules={[{ required: true, message: 'please input your password!' }]}
-      >
-        <Input
-          prefix={<LockOutlined className="site-form-item-icon" />}
-          type="password"
-          placeholder="Password"
-        />
-      </Form.Item>
+  
+
+
    
 
       <Form.Item>
