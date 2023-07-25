@@ -3,6 +3,7 @@
 import { createContext, useEffect, useState } from 'react';
 import { loginUser } from '../server/apis/user';
 import { message } from 'antd';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -11,7 +12,7 @@ export const AuthContext= createContext(null);
 
 export const AuthProvider:any = ({ children }:any) => {
 
-
+    const navigate = useNavigate()
 
     const [messageApi, contextHolder] = message.useMessage();        
     const [isLoading, setIsLoading] = useState(false);
@@ -40,6 +41,7 @@ export const AuthProvider:any = ({ children }:any) => {
                     type:"success",
                     content:response.message
                    });
+                navigate('/home')
             }
             else{
                 setIsLoading(false)
@@ -68,6 +70,7 @@ export const AuthProvider:any = ({ children }:any) => {
             type:"success",
             content:"Logout success"
            });
+        navigate('/register')
     };
 
     const isLoggedIn = async () => {

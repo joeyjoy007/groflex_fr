@@ -149,7 +149,7 @@ const All_user = () => {
     </Modal>
     </div>
   </div>
-  <div style={{position:'absolute',bottom:0,width:'99%',justifyContent:'center',display:'flex'}}>
+  <div style={{position:'relative',bottom:-10,width:'99%',justifyContent:'center',display:'flex'}}>
 
     <Pagination current={page_no} pageSize={5} total={Math.round(paginateUser)} onChange={(e)=>pagination(e)} />
   </div>

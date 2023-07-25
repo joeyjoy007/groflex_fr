@@ -1,6 +1,6 @@
-import { LockOutlined, UserOutlined ,UploadOutlined } from '@ant-design/icons';
-import { Button, Radio, Form, Input,DatePicker,Select,Checkbox,Upload,Row,Col,UploadFile } from 'antd';
-import { useNavigate } from 'react-router-dom';
+import { LockOutlined, UserOutlined,HomeOutlined,PushpinOutlined ,MailOutlined,UploadOutlined } from '@ant-design/icons';
+import { Button, Radio, Form, Input,DatePicker,Select,Checkbox,Upload,Row,Col,UploadFile, message } from 'antd';
+import { Link, useNavigate } from 'react-router-dom';
 import { registerUser } from '../../server/apis/user';
 import React from 'react';
 import { get_country } from '../../server/apis/country';
@@ -9,6 +9,8 @@ import { get_state } from '../../server/apis/state';
 const Register = () => {
 
     const navigate = useNavigate();
+
+    const [messageApi, contextHolder] = message.useMessage();
 
     const [countries, setCountries] = React.useState(null);
     const [state, setState] = React.useState(null);
@@ -20,12 +22,23 @@ const Register = () => {
      try {
       const register = await registerUser(values).then((res: any)=>{
         console.log(res)
+        messageApi.open({
+          type:'success',
+          content:'Registration success'
+        })
         navigate('/l')
       }).catch((err: any)=>{
-        console.log(err.message)
+        messageApi.open({
+          type:'error',
+          content:"Registration unsuccessfull"
+        })
+
       })
      } catch (error: any) {
-      console.log(error.message)
+      messageApi.open({
+        type:'error',
+        content:error.message
+      })
      }
       };
 
@@ -76,7 +89,8 @@ const Register = () => {
   return (
     
     <div style={{border:'2px solid gray', padding:20,borderRadius:10}}>
-
+      {contextHolder}
+      <h4>Register</h4>
     <Form
       form={form}
       name="normal_login"
@@ -99,7 +113,7 @@ const Register = () => {
         style={{marginLeft:10}}
         rules={[{ required: true, message: 'write email in correct format' }]}
       >
-        <Input type='email' prefix={<UserOutlined className="site-form-item-icon" />} placeholder="email" />
+        <Input type='email' prefix={<MailOutlined  className="site-form-item-icon" />} placeholder="email" />
       </Form.Item>
     </div>
 
@@ -155,14 +169,14 @@ const Register = () => {
         name="city"
         rules={[{ required: true, message: 'please input your city!' }]}
       >
-        <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="city" />
+        <Input prefix={<HomeOutlined className="site-form-item-icon" />} placeholder="city" />
       </Form.Item>
 
      <Form.Item
         name="zip-code"
         rules={[{ required: true, message: 'please input your zip-code!' }]}
       >
-        <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="zip-code" />
+        <Input prefix={<PushpinOutlined className="site-form-item-icon" />} placeholder="zip-code" />
       </Form.Item>
    
      </div>
@@ -247,6 +261,7 @@ const Register = () => {
         <Button type="primary" htmlType="submit" className="login-form-button">
           Register
         </Button>
+         Or <Link to='/login'>Login</Link>
       </Form.Item>
     </Form>
     </div>

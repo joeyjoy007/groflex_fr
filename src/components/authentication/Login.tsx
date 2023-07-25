@@ -1,7 +1,7 @@
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Modal, Form, Input } from 'antd';
 import React, { useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/context';
 import Password from '../pages/password_form/Password';
 
@@ -19,6 +19,7 @@ const Login = () => {
       const [form1] = Form.useForm();
   return (
     <div style={{border:'2px solid gray',padding:20,borderRadius:10,justifyContent:'center',alignItems:'center'}}>
+        <h4>Login</h4>
          <Form
       name="normal_login"
       className="login-form"
@@ -52,6 +53,7 @@ const Login = () => {
         <Button type="primary" htmlType="submit" className="login-form-button">
           Log in
         </Button>
+         Or <Link to='/register'>Register</Link>
       </Form.Item>
     </Form>
 

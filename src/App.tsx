@@ -6,7 +6,7 @@ import { AuthProvider } from './context/context';
 const App = () => {
   React.useEffect(() => {
     setUpAxios();
-});
+})
 
   return (
     <>

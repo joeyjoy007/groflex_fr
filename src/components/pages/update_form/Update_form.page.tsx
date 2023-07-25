@@ -1,4 +1,4 @@
-import { LockOutlined, UserOutlined } from '@ant-design/icons';
+import { LockOutlined, PushpinOutlined,HomeOutlined,MailOutlined,UserOutlined } from '@ant-design/icons';
 import { Button, Checkbox, DatePicker, Form, Input, Select, message } from 'antd';
 import { updateUser } from '../../../server/apis/user';
 import moment from 'moment';
@@ -62,7 +62,7 @@ const Update_form = ({allInfo,form,setIsModalOpen,paginate}: any) => {
 
       }
 
-      };
+      }
 
       const fetch_countries = async ()=>{
         try {
@@ -122,7 +122,7 @@ const Update_form = ({allInfo,form,setIsModalOpen,paginate}: any) => {
         name="email"
       >
         <Input
-          prefix={<LockOutlined className="site-form-item-icon" />}
+          prefix={<MailOutlined className="site-form-item-icon" />}
           placeholder={allInfo.email}
           value={allInfo.email}
           disabled
@@ -138,7 +138,7 @@ const Update_form = ({allInfo,form,setIsModalOpen,paginate}: any) => {
         name="zip_code"
       >
         <Input
-          prefix={<LockOutlined className="site-form-item-icon" />}
+          prefix={<PushpinOutlined  className="site-form-item-icon" />}
           placeholder={allInfo.zip_code}
         />
     </Form.Item>
@@ -190,7 +190,7 @@ const Update_form = ({allInfo,form,setIsModalOpen,paginate}: any) => {
         name="city"
       >
         <Input
-          prefix={<LockOutlined className="site-form-item-icon" />}
+          prefix={<HomeOutlined className="site-form-item-icon" />}
           placeholder={allInfo.city}
         />
       </Form.Item>
