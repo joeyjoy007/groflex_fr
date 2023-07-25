@@ -9,8 +9,8 @@ export const loginUser = async (data: any) => {
     return await axios.post('/user/login', data);
 };
 
-export const getUser = async (data: any) => {
-    return await axios.get('/user/get', data);
+export const getUser = async () => {
+    return await axios.get('/user/get');
 };
 
 export const deleteUser = async (data: any) => {
@@ -22,5 +22,14 @@ export const singleUser = async (data: any) => {
 };
 
 export const searhUser = async (data: any) => {
-    return await axios.post(`/user/search/${data}`);
+    return await axios.post(`/user/search/${data?.target?.value}`);
+};
+
+export const updateUser = async (data: any) => {
+    console.log("aa",data)
+    return await axios.patch('/user/update',data);
+};
+
+export const paginate = async (data: any) => {
+    return await axios.post('/user/page',data);
 };

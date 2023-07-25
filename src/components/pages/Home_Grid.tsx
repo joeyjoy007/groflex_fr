@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
-import { Avatar, Card,Skeleton,Switch,Pagination,Popover,Input} from 'antd';
+import { Avatar,Popover} from 'antd';
 import React, { useContext } from 'react';
 import { Layout, Space } from 'antd';
 import { AuthContext } from '../../context/context';
+import All_user from './All_user';
 
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -16,20 +16,15 @@ const headerStyle: React.CSSProperties = {
   backgroundColor: '#7dbcea',
 };
 
-const { Meta } = Card;
-const {Search} = Input
+
 const Home_Grid = () => {
     const [loading, setLoading] = React.useState(true);
     const [info, setInfo] = React.useState(null);
 
-    const onChange = (checked: boolean) => {
-      setLoading(!checked);
-    };
-
-    const {logout} = useContext(AuthContext);
+    const {logout}: any = useContext(AuthContext);
 
     React.useEffect(() => {
-      const infom = localStorage.getItem('userInfo');
+      const infom: any = localStorage.getItem('userInfo');
       setInfo(JSON.parse(infom));
     }, [])
     
@@ -54,62 +49,9 @@ const Home_Grid = () => {
       </Popover>
       </Header>
     </Layout>
-    <div style={{width:'100%'}}>
-    <Search width={100} placeholder="input search loading with enterButton" loading enterButton />
-    <Card
-    style={{ width: 300,padding:25 }}
-    cover={
-      <img
-        alt="example"
-        src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
-      />
-    }
-    actions={[
-      <SettingOutlined key="setting" />,
-      <EditOutlined key="edit" />,
-      <EllipsisOutlined key="ellipsis" />,
-    ]}
-  >
-    <Meta
-      avatar={<Avatar src="https://xsgames.co/randomusers/avatar.php?g=pixel" />}
-      title="Card title"
-      description="This is the description"
-    />
-  </Card>
-
-    </div>
-    <div style={{position:'absolute',bottom:0,width:'99%',justifyContent:'center',display:'flex'}}>
-    <Pagination defaultCurrent={1} total={50} />
-    </div>
+ <All_user/>
   </Space>
-   
-
-
-
-  {/* <Switch checked={!loading} onChange={onChange} />
-      <Card style={{ width: 300, marginTop: 16 }} loading={loading}>
-        <Meta
-          avatar={<Avatar src="https://xsgames.co/randomusers/avatar.php?g=pixel&key=1" />}
-          title="Card title"
-          description="This is the description"
-        />
-      </Card>
-      <Card
-        style={{ width: 300, marginTop: 16 }}
-        actions={[
-          <SettingOutlined key="setting" />,
-          <EditOutlined key="edit" />,
-          <EllipsisOutlined key="ellipsis" />,
-        ]}
-      >
-        <Skeleton loading={loading} avatar active>
-          <Meta
-            avatar={<Avatar src="https://xsgames.co/randomusers/avatar.php?g=pixel&key=2" />}
-            title="Card title"
-            description="This is the description"
-          />
-        </Skeleton>
-      </Card> */}
+  
   
     </>
   )
