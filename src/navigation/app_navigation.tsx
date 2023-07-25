@@ -25,9 +25,9 @@ const App_navigation = () => {
         </>
     ):(
         <>
-        <div  style={{display:'flex',height:'100vh',justifyContent:'center',alignItems:'center'}}>
+        <div  style={{display:'flex',height:'100vh',justifyContent:'center',alignItems:'center',backgroundImage:' linear-gradient(315deg, #378b29 0%, #ffffff 74%)'}}>
         <Routes>
-        <Route path="/register" element={<Register/>}/>
+        <Route path="/" element={<Register/>}/>
         <Route path="/login" element={<Login/>}/>
 
         </Routes>

@@ -5,6 +5,7 @@ import React from 'react';
 import { deleteUser, getUser, paginate, searhUser } from '../../server/apis/user';
 import Update_form from './update_form/Update_form.page.tsx';
 import Password from './password_form/Password.tsx';
+import moment from 'moment';
 
 
 const All_user = () => {
@@ -111,9 +112,9 @@ const All_user = () => {
   
 
   return (
-    <>
+    <div style={{height:'80vh',justifyContent:'space-between',display:'flex',flexDirection:'column'}}>
     {contextHolder}
-  <div style={{width:'100%'}}>
+  <div style={{width:'100%',height:'80vh',position:'relative'}}>
     <Search onChange={(e)=>search_users(e)} width={100} placeholder="search users"  />
       <div style={{display:'flex',flexWrap:'wrap'}}>
       {
@@ -121,7 +122,7 @@ const All_user = () => {
       return (
         <Card
         key={e._id}
-        style={{ width: 'auto',padding:20,marginLeft:'1rem',marginTop:'1rem' }}
+        style={{ width: 310,padding:20,marginLeft:'1rem',marginTop:'1rem' }}
         actions={[
           <EditOutlined onClick={()=>modal_setting(e)} key="edit" />,
           <DeleteOutlined onClick={()=>delete_user(e._id)} key="setting" />,
@@ -130,9 +131,40 @@ const All_user = () => {
         >
         <Meta
           avatar={<Avatar src={e.profile} />}
-          title={e?.username}
-          description={e?.email}
+          title={
+            <div>
+             <div style={{display:'flex',justifyContent:'space-between'}}>
+               {e?.username}
+             </div>
+              <div style={{display:'flex',justifyContent:'space-between'}}>
+               <div style={{fontSize:12}}>{moment(e.dob).format("DD-MM-YYYY")}</div>
+               <span style={{fontSize:12}}>
+                 {e?.gender}
+               </span>
+              </div>
+            </div>
+          }
+          description={
+            <div>
+              {e?.email}
+             <div style={{display:'flex',justifyContent:'space-between'}}>
+                <span style={{fontWeight:'bold',color:'#222222'}}>
+                  {e?.country?.country}
+                </span>
+                <div>
+                <span style={{fontWeight:'600',color:'#222222'}}>{e?.state?.state}</span>
+                <span style={{fontWeight:'400',color:'#222222',fontSize:12}}>, {e?.city}</span>
+            </div>
+           
+             </div>
+             <div style={{float:'right',fontWeight:'bold',color:'#222222',fontSize:13}}>
+              {e?.zip_code}
+            </div>
+            </div>
+          }
         />
+
+        
        </Card>
     
       )
@@ -149,11 +181,12 @@ const All_user = () => {
     </Modal>
     </div>
   </div>
-  <div style={{position:'relative',bottom:-10,width:'99%',justifyContent:'center',display:'flex'}}>
 
+
+  <div style={{justifyContent:'center',display:'flex',position:'fixed',bottom:10,left:'50%'}}>
     <Pagination current={page_no} pageSize={5} total={Math.round(paginateUser)} onChange={(e)=>pagination(e)} />
   </div>
-    </>
+    </div>
   )
 }
 

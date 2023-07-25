@@ -70,7 +70,7 @@ export const AuthProvider:any = ({ children }:any) => {
             type:"success",
             content:"Logout success"
            });
-        navigate('/register')
+        navigate('/')
     };
 
     const isLoggedIn = async () => {
@@ -87,6 +87,7 @@ export const AuthProvider:any = ({ children }:any) => {
                     type:"info",
                     content:"Welcome"
                    });
+                navigate('/home')
             }
             setIsLoading(false);
         } catch (error: any) {

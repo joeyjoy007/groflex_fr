@@ -26,7 +26,9 @@ const Register = () => {
           type:'success',
           content:'Registration success'
         })
-        navigate('/l')
+       setTimeout(() => {
+        navigate('/login')
+       }, 1000);
       }).catch((err: any)=>{
         messageApi.open({
           type:'error',
@@ -88,7 +90,7 @@ const Register = () => {
       ];
   return (
     
-    <div style={{border:'2px solid gray', padding:20,borderRadius:10}}>
+    <div style={{border:'2px solid white',boxShadow:'3px 2px 2px gray', padding:20,borderRadius:10,background:'white'}}>
       {contextHolder}
       <h4>Register</h4>
     <Form

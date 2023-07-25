@@ -18,7 +18,7 @@ const Login = () => {
       const [modal2Open, setModal2Open] = React.useState(false);
       const [form1] = Form.useForm();
   return (
-    <div style={{border:'2px solid gray',padding:20,borderRadius:10,justifyContent:'center',alignItems:'center'}}>
+    <div style={{border:'2px solid white',boxShadow:'3px 2px 2px gray',background:'white',padding:20,borderRadius:10,justifyContent:'center',alignItems:'center'}}>
         <h4>Login</h4>
          <Form
       name="normal_login"
@@ -53,7 +53,7 @@ const Login = () => {
         <Button type="primary" htmlType="submit" className="login-form-button">
           Log in
         </Button>
-         Or <Link to='/register'>Register</Link>
+         Or <Link to='/'>Register</Link>
       </Form.Item>
     </Form>
 
