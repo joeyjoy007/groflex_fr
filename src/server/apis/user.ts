@@ -33,3 +33,11 @@ export const updateUser = async (data: any) => {
 export const paginate = async (data: any) => {
     return await axios.post('/user/page',data);
 };
+
+export const reset_password = async (data: any) => {
+    return await axios.patch('/user/password',data);
+};
+
+export const reset_password_by_mail = async (data: any) => {
+    return await axios.patch('/user/mail',data);
+};

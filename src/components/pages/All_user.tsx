@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { EditOutlined, EllipsisOutlined, SettingOutlined,DeleteOutlined } from '@ant-design/icons';
-import { Avatar, Card,Skeleton,Switch,Pagination,Popover,Input, Modal, Form} from 'antd';
+import { Avatar, Card,Skeleton,Switch,Pagination,Popover,Input, Modal, Form, message} from 'antd';
 import React from 'react';
 import { deleteUser, getUser, paginate, searhUser } from '../../server/apis/user';
 import Update_form from './update_form/Update_form.page.tsx';
+import Password from './password_form/Password.tsx';
 
 
 const All_user = () => {
@@ -16,19 +17,10 @@ const All_user = () => {
   const [allInfo, setAllInfo] = React.useState(null);
   const [paginateUser, setPaginateUser] = React.useState(1)
   const [page_no, setPage_no] = React.useState(1)
+  const [openPassword, setOpenPassword] = React.useState(false)
 
-  // const fetchUser = async()=>{
-  //   try {
-  //     const users = await getUser().then((res: any)=>{
-  //      setAllUsers(res?.payload)
-  //      setPaginateUser(res?.payload?.length)
-  //     }).catch((err: any)=>{
-  //       console.log(err.message)
-  //     })
-  //   } catch (error: any) {
-  //     console.log(error.message)
-  //   }
-  // }
+  const [messageApi, contextHolder] = message.useMessage();
+
 
 
   const pagination = async(page_no: any)=>{
@@ -78,31 +70,51 @@ const All_user = () => {
         const search_user =await deleteUser({_id:e}).then((res: any)=>{
           // fetchUser();
           pagination(1);
+          messageApi.open({
+            type:'success',
+            content:'user deleted'
+          })
         }).catch((err: any)=>{
-          console.log(err.message)
+          messageApi.open({
+            type:'error',
+            content:'user not deleted'
+          })
         })
       } catch (error: any) {
-        console.log(error.message)
+        messageApi.open({
+          type:'error',
+          content:error.message
+        })
       
     }
   }
 
   const modal_setting = (e: any)=>{
+    setOpenPassword(false)
     form.resetFields()
     setAllInfo(e);
     setIsModalOpen(!isModalOpen);
   }
 
+  const password_modal = (e: any)=>{
+    setOpenPassword(true)
+    form1.resetFields()
+    setAllInfo(e);
+    setIsModalOpen(!isModalOpen);
+  }
   
 
   const [form] = Form.useForm();
+  const [form1] = Form.useForm();
+
   
   
 
   return (
     <>
+    {contextHolder}
   <div style={{width:'100%'}}>
-    <Search onChange={(e)=>search_users(e)} width={100} placeholder="input search loading with enterButton" loading enterButton />
+    <Search onChange={(e)=>search_users(e)} width={100} placeholder="search users"  />
       <div style={{display:'flex',flexWrap:'wrap'}}>
       {
     allUsers?.map((e: any)=>{
@@ -113,7 +125,7 @@ const All_user = () => {
         actions={[
           <EditOutlined onClick={()=>modal_setting(e)} key="edit" />,
           <DeleteOutlined onClick={()=>delete_user(e._id)} key="setting" />,
-          <EllipsisOutlined key="ellipsis" />,
+          <EllipsisOutlined onClick={()=>password_modal(e)} key="ellipsis" />,
         ]}
         >
         <Meta
@@ -127,7 +139,13 @@ const All_user = () => {
     })
    }     
     <Modal open={isModalOpen} onCancel={()=>setIsModalOpen(false)} footer={null}>
-      <Update_form allInfo = {allInfo} form={form}/>
+     {
+      openPassword ?(
+        <Password passwordKey={1} allInfo={allInfo} form1={form1} setIsModalOpen={setIsModalOpen}/>
+      ):(
+        <Update_form allInfo={allInfo} form={form} setIsModalOpen={setIsModalOpen} paginate={()=>pagination(1)}/>
+      )
+     }
     </Modal>
     </div>
   </div>

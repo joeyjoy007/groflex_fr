@@ -3,6 +3,7 @@ import { Button, Modal, Form, Input } from 'antd';
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/context';
+import Password from '../pages/password_form/Password';
 
 const Login = () => {
     const navigate = useNavigate();
@@ -13,8 +14,9 @@ const Login = () => {
 
       };
 
-      const {login} = useContext(AuthContext);
+      const {login}: any = useContext(AuthContext);
       const [modal2Open, setModal2Open] = React.useState(false);
+      const [form1] = Form.useForm();
   return (
     <div style={{border:'2px solid gray',padding:20,borderRadius:10,justifyContent:'center',alignItems:'center'}}>
          <Form
@@ -54,13 +56,13 @@ const Login = () => {
     </Form>
 
     <Modal
-        title="Vertically centered modal dialog"
+        footer={null}
         centered
         open={modal2Open}
         onOk={() => setModal2Open(false)}
         onCancel={() => setModal2Open(false)}
       >
-      <span>Password reset</span>
+      <Password passwordKey={0} form1={form1} setIsModalOpen={setModal2Open}/>
       </Modal>
     </div>
   )
